@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HighchartsChartModule } from 'highcharts-angular';
 
 import { AppComponent } from './app.component';
+import { DataService } from './data.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     HighchartsChartModule,
   ],
+  providers: [DataService],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
 })

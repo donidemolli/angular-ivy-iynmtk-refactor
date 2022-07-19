@@ -3,6 +3,7 @@ import { User, Demographic } from './data-interfaces';
 import { HttpClient } from '@angular/common/http';
 import * as Highcharts from 'highcharts';
 import * as _ from 'lodash';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'my-app',
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
     this.chartRef = chart;
   };
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private dataService: DataService) {}
 
   public ngOnInit() {
     this.loadUserData();
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit {
   }
 
   private loadUserData() {
-    this.httpClient.get('assets/userdata.json').subscribe((users) => {
+    this.dataService.getUserData().subscribe((users) => {
       this.currentUser = users[0];
       this.otherUsers = [users[1], users[2]];
     });
@@ -65,8 +66,8 @@ export class AppComponent implements OnInit {
   }
 
   private loadDemographicsData() {
-    this.httpClient.get('assets/demographicsdata.json').subscribe((demo) => {
-      this.demographics = demo as Demographic[];
+    this.dataService.getDemographicData().subscribe((demo) => {
+      this.demographics = demo;
       this.initializeChartData();
     });
   }
