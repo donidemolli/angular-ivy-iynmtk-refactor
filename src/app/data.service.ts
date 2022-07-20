@@ -7,8 +7,8 @@ import { Demographic, User } from './data-interfaces';
 export class DataService {
   constructor(private httpClient: HttpClient) {}
 
-  getUserData(): Observable<User> {
-    return this.httpClient.get<User>('assets/userdata.json');
+  getUserData(): Observable<User[]> {
+    return this.httpClient.get<User[]>('assets/userdata.json');
   }
 
   getDemographicData(): Observable<Demographic[]> {

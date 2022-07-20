@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { User, Demographic } from './data-interfaces';
-import { HttpClient } from '@angular/common/http';
 import * as Highcharts from 'highcharts';
 import * as _ from 'lodash';
 import { DataService } from './data.service';
@@ -37,32 +36,11 @@ export class AppComponent implements OnInit {
     this.loadDemographicsData();
   }
 
-  public onHover(event, u: User) {
-    if (u.phone.length !== 10) {
-      event.currentTarget.style.background = 'LightCoral';
-    }
-  }
-
-  onHoverExit(event, u: User) {
-    event.currentTarget.style.background = 'white';
-  }
-
   private loadUserData() {
     this.dataService.getUserData().subscribe((users) => {
-      this.currentUser = users[0];
-      this.otherUsers = [users[1], users[2]];
+      this.currentUser = users.splice(0, 1)[0];
+      this.otherUsers = users;
     });
-  }
-
-  public getFormattedUserPhoneNumber(phone: string): string {
-    if (!phone || phone.trim() === '') {
-      return '';
-    }
-    let formatted: string;
-    formatted = '(' + phone.substring(0, 3) + ') ';
-    formatted = formatted + phone.substring(3, 6) + '-';
-    formatted = formatted + phone.substring(6, 10);
-    return formatted;
   }
 
   private loadDemographicsData() {
@@ -72,21 +50,18 @@ export class AppComponent implements OnInit {
     });
   }
 
-  //  Array utility method that zips together 2 equal sized arrays
-  private static arrayZip = (a, b) => a.map((k, i) => [k, b[i]]);
-
   private initializeChartData() {
+    const arrayZip = (a, b) => a.map((k, i) => [k, b[i]]);
     const cityGroups = _.groupBy(this.demographics, 'city');
     Object.keys(cityGroups).forEach((city) => {
       const citySeries = {
         type: 'line',
         name: city,
-        data: AppComponent.arrayZip(
+        data: arrayZip(
           cityGroups[city].map((d) => d.year),
           cityGroups[city].map((d) => d.population)
         ),
       };
-      console.log(citySeries);
       this.chartRef.addSeries(citySeries);
     });
     this.updateFlag = true;

@@ -4,18 +4,17 @@
   <div class="sectionTitle">ME:</div>
   <div class="nameSection" *ngIf="currentUser">
     <div>Name: {{ currentUser.name }}</div>
-    <div>Phone: {{ getFormattedUserPhoneNumber(currentUser.phone) }}</div>
+    <div>Phone: {{ currentUser.phone | phone }}</div>
   </div>
 
   <div class="sectionTitle">OTHER USERS:</div>
   <div #otherusers class="nameSection">
     <div
       *ngFor="let other of otherUsers"
-      (mouseover)="onHover($event, other)"
-      (mouseout)="onHoverExit($event, other)"
+      [class.over10digits]="other.phone.length != 10"
     >
       <div>Name: {{ other.name }}</div>
-      <div>Phone: {{ getFormattedUserPhoneNumber(other.phone) }}</div>
+      <div>Phone: {{ other.phone | phone }}</div>
     </div>
   </div>
 </div>

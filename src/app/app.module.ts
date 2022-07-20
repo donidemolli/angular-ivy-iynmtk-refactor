@@ -6,6 +6,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 
 import { AppComponent } from './app.component';
 import { DataService } from './data.service';
+import { PhonePipe } from './phone.pipe';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { DataService } from './data.service';
     HighchartsChartModule,
   ],
   providers: [DataService],
-  declarations: [AppComponent],
+  declarations: [AppComponent, PhonePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

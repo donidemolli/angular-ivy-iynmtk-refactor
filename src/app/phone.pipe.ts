@@ -4,7 +4,14 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'phone',
 })
 export class PhonePipe implements PipeTransform {
-  transform(value: any, args?: any): any {
-    return null;
+  transform(phone): string {
+    if (!phone || phone.trim() === '') {
+      return '';
+    }
+    let formatted: string;
+    formatted = '(' + phone.substring(0, 3) + ') ';
+    formatted = formatted + phone.substring(3, 6) + '-';
+    formatted = formatted + phone.substring(6, 10);
+    return formatted;
   }
 }
