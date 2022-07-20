@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User, Demographic } from './data-interfaces';
+
 import * as Highcharts from 'highcharts';
 import * as _ from 'lodash';
-import { DataService } from './data.service';
+import { Demographic, User } from './interfaces/data-interfaces';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'my-app',
