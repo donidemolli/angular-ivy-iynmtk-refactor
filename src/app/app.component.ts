@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import * as Highcharts from 'highcharts';
 import * as _ from 'lodash';
 import { Demographic, User } from './interfaces/data-interfaces';
