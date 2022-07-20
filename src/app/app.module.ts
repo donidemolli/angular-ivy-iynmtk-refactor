@@ -5,8 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HighchartsChartModule } from 'highcharts-angular';
 
 import { AppComponent } from './app.component';
-import { DataService } from './data.service';
-import { PhonePipe } from './phone.pipe';
+import { DataService } from './services/data.service';
+import { PhonePipe } from './pipes/phone.pipe';
 
 @NgModule({
   imports: [
