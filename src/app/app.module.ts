@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { DataService } from './services/data.service';
 import { PhonePipe } from './pipes/phone.pipe';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { PhoneBookComponent } from './components/phone-book/phone-book.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,12 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
     HighchartsChartModule,
   ],
   providers: [DataService],
-  declarations: [AppComponent, PhonePipe, LineChartComponent],
+  declarations: [
+    AppComponent,
+    PhonePipe,
+    LineChartComponent,
+    PhoneBookComponent,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

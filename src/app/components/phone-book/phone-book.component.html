@@ -1,0 +1,19 @@
+<div id="phonebook" class="widget">
+  <div class="widgetTitle">User Phone Book</div>
+  <div class="sectionTitle">ME:</div>
+  <div class="nameSection" *ngIf="currentUser">
+    <div>Name: {{ currentUser.name }}</div>
+    <div>Phone: {{ currentUser.phone | phone }}</div>
+  </div>
+
+  <div class="sectionTitle">OTHER USERS:</div>
+  <div #otherusers class="nameSection">
+    <div
+      *ngFor="let other of otherUsers"
+      [class.over10digits]="other.phone.length != 10"
+    >
+      <div>Name: {{ other.name }}</div>
+      <div>Phone: {{ other.phone | phone }}</div>
+    </div>
+  </div>
+</div>

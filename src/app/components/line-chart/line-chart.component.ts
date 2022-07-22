@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import * as _ from 'lodash';
+import { Demographic } from '../../interfaces/data-interfaces';
 
 @Component({
   selector: 'app-line-chart',
@@ -8,7 +9,7 @@ import * as _ from 'lodash';
   styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnInit, OnChanges {
-  @Input() demographics;
+  @Input() demographics: Demographic[];
   private chartRef;
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
@@ -17,7 +18,6 @@ export class LineChartComponent implements OnInit, OnChanges {
     },
     series: [],
   };
-
   updateFlag = false;
 
   chartCallback: Highcharts.ChartCallbackFunction = (chart) => {
@@ -32,7 +32,7 @@ export class LineChartComponent implements OnInit, OnChanges {
   }
 
   private initializeChartData() {
-    const arrayZip = (a, b) => a.map((k, i) => [k, b[i]]);
+    const arrayZip = (a, b) => a.map((el, index) => [el, b[index]]);
     const cityGroups = _.groupBy(this.demographics, 'city');
     Object.keys(cityGroups).forEach((city) => {
       console.log(cityGroups[city]);

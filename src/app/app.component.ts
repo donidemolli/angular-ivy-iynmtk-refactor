@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import * as _ from 'lodash';
 import { Demographic, User } from './interfaces/data-interfaces';
 import { DataService } from './services/data.service';
 
@@ -10,11 +8,10 @@ import { DataService } from './services/data.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  public currentUser: User;
-  public otherUsers: User[];
+  public users: User[];
 
   public demographics: Demographic[];
-  
+
   constructor(private dataService: DataService) {}
 
   public ngOnInit() {
@@ -24,8 +21,7 @@ export class AppComponent implements OnInit {
 
   private loadUserData() {
     this.dataService.getUserData().subscribe((users) => {
-      this.currentUser = users.splice(0, 1)[0];
-      this.otherUsers = users;
+      this.users = users;
     });
   }
 
