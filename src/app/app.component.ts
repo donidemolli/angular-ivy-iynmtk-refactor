@@ -13,22 +13,8 @@ export class AppComponent implements OnInit {
   public currentUser: User;
   public otherUsers: User[];
 
-  private chartRef;
-  private demographics: Demographic[];
-  public updateFlag: boolean = false;
-
-  Highcharts: typeof Highcharts = Highcharts;
-  chartOptions: Highcharts.Options = {
-    title: {
-      text: 'Demographics',
-    },
-    series: [],
-  };
-
-  chartCallback: Highcharts.ChartCallbackFunction = (chart) => {
-    this.chartRef = chart;
-  };
-
+  public demographics: Demographic[];
+  
   constructor(private dataService: DataService) {}
 
   public ngOnInit() {
@@ -46,24 +32,6 @@ export class AppComponent implements OnInit {
   private loadDemographicsData() {
     this.dataService.getDemographicData().subscribe((demo) => {
       this.demographics = demo;
-      this.initializeChartData();
     });
-  }
-
-  private initializeChartData() {
-    const arrayZip = (a, b) => a.map((k, i) => [k, b[i]]);
-    const cityGroups = _.groupBy(this.demographics, 'city');
-    Object.keys(cityGroups).forEach((city) => {
-      const citySeries = {
-        type: 'line',
-        name: city,
-        data: arrayZip(
-          cityGroups[city].map((d) => d.year),
-          cityGroups[city].map((d) => d.population)
-        ),
-      };
-      this.chartRef.addSeries(citySeries);
-    });
-    this.updateFlag = true;
   }
 }
