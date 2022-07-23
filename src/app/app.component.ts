@@ -8,7 +8,7 @@ import { DataService } from './services/data.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  public users: User[];
+  public users: { currentUser: User; otherUsers: User[] };
 
   public demographics: Demographic[];
 

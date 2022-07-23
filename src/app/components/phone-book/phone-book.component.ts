@@ -7,7 +7,7 @@ import { User } from '../../interfaces/data-interfaces';
   styleUrls: ['./phone-book.component.css'],
 })
 export class PhoneBookComponent implements OnInit, OnChanges {
-  @Input() users: User[];
+  @Input() users: { currentUser: User; otherUsers: User[] };
 
   public currentUser: User;
   public otherUsers: User[];
@@ -17,7 +17,7 @@ export class PhoneBookComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges() {
-    this.currentUser = this.users.splice(0, 1)[0];
-    this.otherUsers = this.users;
+    this.currentUser = this.users?.currentUser;
+    this.otherUsers = this.users?.otherUsers;
   }
 }
