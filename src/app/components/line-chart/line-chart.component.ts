@@ -42,6 +42,7 @@ export class LineChartComponent implements OnInit, OnChanges {
         name: city,
         data: year_population_data,
       };
+      console.log(citySeries);
       this.chartRef.addSeries(citySeries);
     });
     this.updateFlag = true;
