@@ -8,7 +8,7 @@ import { Demographic } from '../../interfaces/data-interfaces';
   styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnInit, OnChanges {
-  @Input() cityGroups: Demographic[];
+  @Input() cities_demographics: Demographic[];
   private chartRef;
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
@@ -27,14 +27,14 @@ export class LineChartComponent implements OnInit, OnChanges {
 
   ngOnInit() {}
   ngOnChanges() {
-    if (this.cityGroups) {
+    if (this.cities_demographics) {
       this.initializeChartData();
     }
   }
 
   private initializeChartData() {
-    Object.keys(this.cityGroups).forEach((city) => {
-      const year_population_data = this.cityGroups[city].map(
+    Object.keys(this.cities_demographics).forEach((city) => {
+      const year_population_data = this.cities_demographics[city].map(
         (city: Demographic) => [city.year, city.population]
       );
       const citySeries = {

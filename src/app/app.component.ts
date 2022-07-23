@@ -10,7 +10,7 @@ import { DataService } from './services/data.service';
 export class AppComponent implements OnInit {
   public users: { currentUser: User; otherUsers: User[] };
 
-  public demographics: Demographic[];
+  public cities_demographics: Demographic[];
 
   constructor(private dataService: DataService) {}
 
@@ -20,14 +20,14 @@ export class AppComponent implements OnInit {
   }
 
   private loadUserData() {
-    this.dataService.getUserData().subscribe((users) => {
+    this.dataService.getUsersData().subscribe((users) => {
       this.users = users;
     });
   }
 
   private loadDemographicsData() {
     this.dataService.getDemographicData().subscribe((demo) => {
-      this.demographics = demo;
+      this.cities_demographics = demo;
     });
   }
 }

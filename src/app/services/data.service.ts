@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 export class DataService {
   constructor(private httpClient: HttpClient) {}
 
-  getUserData(): Observable<{ currentUser: User; otherUsers: User[] }> {
+  getUsersData(): Observable<{ currentUser: User; otherUsers: User[] }> {
     return this.httpClient.get<User[]>('assets/userdata.json').pipe(
       map((users) => {
         return { currentUser: users.splice(0, 1)[0], otherUsers: users };
