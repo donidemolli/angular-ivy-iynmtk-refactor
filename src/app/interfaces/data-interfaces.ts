@@ -10,3 +10,9 @@ export interface Demographic {
   year: Number;
   population: Number;
 }
+
+export interface chartDataSeries {
+  type: string;
+  name: string;
+  data: any;
+}

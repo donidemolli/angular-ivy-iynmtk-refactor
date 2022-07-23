@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Demographic, User } from './interfaces/data-interfaces';
+import { chartDataSeries, User } from './interfaces/data-interfaces';
 import { DataService } from './services/data.service';
 
 @Component({
@@ -9,8 +9,7 @@ import { DataService } from './services/data.service';
 })
 export class AppComponent implements OnInit {
   public users: { currentUser: User; otherUsers: User[] };
-
-  public cities_demographics: Demographic[];
+  public chartDataArr: chartDataSeries[] = [];
 
   constructor(private dataService: DataService) {}
 
@@ -26,8 +25,9 @@ export class AppComponent implements OnInit {
   }
 
   private loadDemographicsData() {
-    this.dataService.getDemographicData().subscribe((demo) => {
-      this.cities_demographics = demo;
+    this.dataService.getDemographicData().subscribe((data) => {
+      this.chartDataArr = [].concat(data.chartData);
+      console.log(data);
     });
   }
 }
