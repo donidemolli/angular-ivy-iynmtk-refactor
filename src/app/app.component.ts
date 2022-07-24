@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { chartDataSeries, User } from './interfaces/data-interfaces';
 import { DataService } from './services/data.service';
@@ -19,15 +20,21 @@ export class AppComponent implements OnInit {
   }
 
   private loadUserData() {
-    this.dataService.getUsersData().subscribe((users) => {
-      this.users = users;
+    this.dataService.getUsersData().subscribe({
+      next: (users) => {
+        this.users = users;
+      },
+      error: (error: Error) => console.log(error),
     });
   }
 
   private loadDemographicsData() {
-    this.dataService.getDemographicData().subscribe((data) => {
-      this.chartDataArr = [].concat(data.chartData);
-      console.log(data);
+    this.dataService.getDemographicData().subscribe({
+      next: (data) => {
+        this.chartDataArr = data.chartData;
+        console.log(data);
+      },
+      error: (error: Error) => console.log(error),
     });
   }
 }
