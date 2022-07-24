@@ -27,9 +27,7 @@ export class LineChartComponent implements OnInit, OnChanges {
 
   ngOnInit() {}
   ngOnChanges() {
-    if (this.seriesArr) {
-      this.initializeChartData();
-    }
+    this.initializeChartData();
   }
 
   private initializeChartData() {
